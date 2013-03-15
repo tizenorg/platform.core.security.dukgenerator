@@ -5,4 +5,7 @@ includedir=/usr/include
 Name:dukgenerator 
 Description:nothing 
 Version: 1.0.0
+Requires: openssl libcryptsvc
+Libs: -L${libdir} -lcryptsvc
 Cflags: -I${includedir}
+ 
