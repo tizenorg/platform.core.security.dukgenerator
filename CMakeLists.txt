@@ -8,8 +8,10 @@ SET(INCLUDEDIR "\${prefix}/include")
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/inc)
 
-#INCLUDE(FindPkgConfig)
-#pkg_check_modules(pkgs REQUIRED openssl libcryptsvc-devel)
+SET(pc_requires " cryptsvc ")
+
+INCLUDE(FindPkgConfig)
+pkg_check_modules(pkgs REQUIRED ${pc_requires})
 
 FOREACH(flag ${pkgs_CFLAGS})
 	SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} ${flag}")
@@ -33,12 +35,12 @@ SET(libcryptsvc_CPPFLAGS " -DPIC ")
 
 #ADD_LIBRARY(${PROJECT_NAME} SHARED ${SRCS})
 ADD_LIBRARY(${PROJECT_NAME} ${SRCS})
-TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${pkgs_LDFLAGS} -ldl -lssl -lcrypto -lcryptsvc)
+TARGET_LINK_LIBRARIES(${PROJECT_NAME} ${pkgs_LDFLAGS})
 SET_TARGET_PROPERTIES(
 	${PROJECT_NAME}
 	PROPERTIES
-	SOVERSION 0
-	VERSION 0.0.0
+	VERSION ${FULLVER}
+	SOVERSION ${MAJORVER}
 )
 ##################################################################################################################
 
@@ -49,7 +51,12 @@ IF("${ARCH}" STREQUAL "arm")
 	MESSAGE("add -DTARGET")
 ENDIF("${ARCH}" STREQUAL "arm")
 
-CONFIGURE_FILE(${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc)
+SET(PC_NAME ${PROJECT_NAME})
+SET(PC_DESCRIPTION ${DESCRIPTION})
+SET(PC_LDFLAGS -l${PROJECT_NAME})
+SET(PC_REQUIRED ${pc_requires})
+CONFIGURE_FILE(${PROJECT_NAME}.pc.in ${PROJECT_NAME}.pc @ONLY)
+
 INSTALL(FILES ${PROJECT_NAME}.pc DESTINATION lib/pkgconfig)
 INSTALL(TARGETS ${PROJECT_NAME} DESTINATION lib)
 INSTALL(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/inc/ DESTINATION /usr/include)

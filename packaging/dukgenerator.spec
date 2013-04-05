@@ -1,14 +1,14 @@
-Name:      dukgenerator 
+Name:      dukgenerator
 Summary:   nothing
 Version:    1.0.0
-Release:    5
+Release:    6
 Group:      security
 License:    Apache License, Version 2.0
 Source0:    %{name}-%{version}.tar.gz
 BuildRequires: cmake
 
 BuildRequires: pkgconfig(openssl)
-BuildRequires: libcryptsvc-devel
+BuildRequires: pkgconfig(cryptsvc)
 
 %description
 
@@ -23,7 +23,8 @@ Requires: %{name} = %{version}-%{release}
 %setup -q
 
 %build
-cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix}
+MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
+cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix} -DFULLVER=%{version} -DMAJORVER=${MAJORVER} -DDESCRIPTION=%{summary}
 make %{?jobs:-j%jobs}
 
 
@@ -46,5 +47,3 @@ cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
 %files devel
 %{_includedir}/*
 %{_libdir}/pkgconfig/dukgenerator.pc
-%{_datadir}/license/%{name}
-
