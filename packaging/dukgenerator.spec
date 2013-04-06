@@ -1,7 +1,7 @@
 Name:      dukgenerator
 Summary:   nothing
 Version:    1.0.0
-Release:    6
+Release:    7
 Group:      security
 License:    Apache License, Version 2.0
 Source0:    %{name}-%{version}.tar.gz
