@@ -1,3 +1,6 @@
+* Wed May 29 2013 Xavier Roche <xavrock.os@gmail.com> accepted/tizen/20130520.101220@21f6058
+- Remove visibily hidden attribute
+
 * Wed May 29 2013 Xavier Roche <xavrock.os@gmail.com> accepted/tizen/20130520.101220@60319fa
 - Fix x86_64 build-install compliance
 
