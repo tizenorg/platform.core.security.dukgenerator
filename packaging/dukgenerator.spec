@@ -1,47 +1,43 @@
-Name:      dukgenerator
-Summary:   nothing
-Version:    1.0.0
-Release:    7
-Group:      security
-License:    Apache License, Version 2.0
-Source0:    %{name}-%{version}.tar.gz
-BuildRequires: cmake
+Name:           dukgenerator
+Version:        1.0.0
+Release:        7
+License:        Apache-2.0
+Summary:        Device Unique Key Library
+Group:          Security/Libraries
+Source0:        %{name}-%{version}.tar.gz
+BuildRequires:  cmake
 
-BuildRequires: pkgconfig(openssl)
-BuildRequires: pkgconfig(cryptsvc)
+BuildRequires:  pkgconfig(cryptsvc)
+BuildRequires:  pkgconfig(openssl)
 
 %description
+Device Unique Key Library.
 
 %package devel
-Summary: nothing
-Group: security
-Requires: %{name} = %{version}-%{release}
+Summary:        Device Unique Key Library
+Group:          Development/Libraries
+Requires:       %{name} = %{version}
 
 %description devel
+Device Unique Key Library (Development Files).
 
 %prep
 %setup -q
 
 %build
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
-cmake . -DCMAKE_INSTALL_PREFIX=%{_prefix} -DFULLVER=%{version} -DMAJORVER=${MAJORVER} -DDESCRIPTION=%{summary}
-make %{?jobs:-j%jobs}
+%cmake . -DFULLVER=%{version} -DMAJORVER=${MAJORVER} -DDESCRIPTION="%{summary}" -DBUILD_SHARED_LIBS:BOOL=OFF
+make %{?_smp_mflags}
 
 
 %install
-rm -rf %{buildroot}
-#%make_install
-%{__make} DESTDIR=%{?buildroot:%{buildroot}} INSTALL_ROOT=%{?buildroot:%{buildroot}} install
+make DESTDIR=%{?buildroot:%{buildroot}} INSTALL_ROOT=%{?buildroot:%{buildroot}} install
 rm -f %{?buildroot:%{buildroot}}%{_infodir}/dir
 find %{?buildroot:%{buildroot}} -regex ".*\\.la$" | xargs rm -f --
 
-mkdir -p %{buildroot}/usr/share/license
-cp LICENSE.APLv2 %{buildroot}/usr/share/license/%{name}
-
-
 %files
+%license LICENSE.APLv2
 %{_libdir}/*.a
-%{_datadir}/license/%{name}
 
 
 %files devel
