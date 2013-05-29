@@ -20,7 +20,7 @@ ENDFOREACH(flag)
 SET(source_dir "./src")
 SET(include_dir "./inc")
 
-SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} -fvisibility=hidden")
+SET(EXTRA_CFLAGS "${EXTRA_CFLAGS}")
 SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${EXTRA_CFLAGS}")
 SET(EXTRA_CXXFLAGS "${EXTRA_CXXFLAGS} ${EXTRA_CFLAGS}")
 
@@ -30,7 +30,7 @@ SET(SRCS
 )
 
 SET(libcryptsvc_LDFLAGS " -module -avoid-version ${pkgs_LDFLAGS} ")
-SET(libcryptsvc_CFLAGS " ${CFLAGS} -fvisibility=hidden -g -fPIC -I${CMAKE_CURRENT_SOURCE_DIR}/inc ")
+SET(libcryptsvc_CFLAGS " ${CFLAGS} -g -fPIC -I${CMAKE_CURRENT_SOURCE_DIR}/inc ")
 SET(libcryptsvc_CPPFLAGS " -DPIC ")
 
 #ADD_LIBRARY(${PROJECT_NAME} SHARED ${SRCS})
