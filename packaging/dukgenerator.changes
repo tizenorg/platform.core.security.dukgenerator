@@ -1,3 +1,6 @@
+* Wed Jun 05 2013 Xavier Roche <xavrock.os@gmail.com> submit/tizen/20130605.090222@fc4eb76
+- Remove visibility hidden attribute to make wrt-common build with security enabled
+
 * Wed Jun 05 2013 Xavier Roche <xavrock.os@gmail.com> accepted/tizen/20130529.191247@7ba04ad
 - Fix hardcoded library path for x64 build
 
