@@ -26,7 +26,7 @@ Device Unique Key Library (Development Files).
 
 %build
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
-%cmake . -DFULLVER=%{version} -DMAJORVER=${MAJORVER} -DDESCRIPTION="%{summary}" -DBUILD_SHARED_LIBS:BOOL=OFF
+%cmake . -DLIB_INSTALL_DIR:PATH=%{_libdir} -DFULLVER=%{version} -DMAJORVER=${MAJORVER} -DDESCRIPTION="%{summary}" -DBUILD_SHARED_LIBS:BOOL=OFF
 make %{?_smp_mflags}
 
 
