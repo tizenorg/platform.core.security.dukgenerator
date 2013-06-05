@@ -1,3 +1,6 @@
+* Wed Jun 05 2013 Xavier Roche <xavrock.os@gmail.com> accepted/tizen/20130529.191247@7ba04ad
+- Fix hardcoded library path for x64 build
+
 * Wed May 29 2013 Anas Nashif <anas.nashif@intel.com> accepted/tizen/20130520.101220@3f50ab9
 - Fixed package metadata and description
 
