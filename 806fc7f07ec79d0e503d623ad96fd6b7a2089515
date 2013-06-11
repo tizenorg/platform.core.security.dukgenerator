@@ -1,0 +1,9 @@
+Change-Id: I806fc7f07ec79d0e503d623ad96fd6b7a2089515
+Code-Review+2: Anas Nashif <anas.nashif@intel.com>
+Verified+1: Rusty Lynch <rusty.lynch@intel.com>
+Verified+1: Xavier Roche <xavier.roche@eurogiciel.fr>
+Submitted-by: Anas Nashif <anas.nashif@intel.com>
+Submitted-at: Tue, 11 Jun 2013 11:06:25 -0700
+Reviewed-on: https://review.tizen.org/gerrit/3810
+Project: platform/core/security/dukgenerator
+Branch: refs/heads/tizen
