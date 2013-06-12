@@ -38,7 +38,7 @@ char* GetDeviceUniqueKey(char* pAppId, int idLen, int keyLen)
 	}
 
 	pDuk = (char*)calloc(keyLen, 1);
-	PKCS5_PBKDF2_HMAC_SHA1(pAppId, idLen, (unsigned char*)pUniqueKey, keyLen, 1000, keyLen, (unsigned char*)pDuk);
+	PKCS5_PBKDF2_HMAC_SHA1(pAppId, idLen, (unsigned char*)pUniqueKey, keyLen, 1, keyLen, (unsigned char*)pDuk);
 	free(pUniqueKey);
 
 	return pDuk;
