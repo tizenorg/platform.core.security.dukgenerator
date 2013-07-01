@@ -5,6 +5,7 @@ License:        Apache-2.0
 Summary:        Device Unique Key Library
 Group:          Security/Libraries
 Source0:        %{name}-%{version}.tar.gz
+Source1001: 	dukgenerator.manifest
 BuildRequires:  cmake
 
 BuildRequires:  pkgconfig(cryptsvc)
@@ -23,6 +24,7 @@ Device Unique Key Library (Development Files).
 
 %prep
 %setup -q
+cp %{SOURCE1001} .
 
 %build
 MAJORVER=`echo %{version} | awk 'BEGIN {FS="."}{print $1}'`
@@ -36,10 +38,12 @@ rm -f %{?buildroot:%{buildroot}}%{_infodir}/dir
 find %{?buildroot:%{buildroot}} -regex ".*\\.la$" | xargs rm -f --
 
 %files
+%manifest %{name}.manifest
 %license LICENSE.APLv2
 %{_libdir}/*.a
 
 
 %files devel
+%manifest %{name}.manifest
 %{_includedir}/*
 %{_libdir}/pkgconfig/dukgenerator.pc
