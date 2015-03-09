@@ -30,6 +30,8 @@ char* GetDeviceUniqueKey(char* pAppId, int idLen, int keyLen)
 	bool result = true;
 
 	pUniqueKey = (unsigned char*)calloc(keyLen,1);
+	if (pUniqueKey == NULL)
+		return NULL;
 	result = SecFrameGeneratePlatformUniqueKey((unsigned int)keyLen , pUniqueKey);
 	if(result == false)
 	{
@@ -38,6 +40,11 @@ char* GetDeviceUniqueKey(char* pAppId, int idLen, int keyLen)
 	}
 
 	pDuk = (char*)calloc(keyLen, 1);
+	if (pDuk == NULL)
+	{
+		free(pUniqueKey);
+		return NULL;
+	}
 	PKCS5_PBKDF2_HMAC_SHA1(pAppId, idLen, (unsigned char*)pUniqueKey, keyLen, 1, keyLen, (unsigned char*)pDuk);
 	free(pUniqueKey);
 
